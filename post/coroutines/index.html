@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Coroutines</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="/">KSH</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+</ul>
+
+<ul class="subscription">
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Feb 18, 2021
+     - 3 minute read 
+    
+
+    
+    
+      - <a class="label" href="/categories/unity/">Unity </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Coroutines 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#coroutines">Coroutines?</a>
+      <ul>
+        <li><a href="#start">Start</a></li>
+        <li><a href="#stop">Stop</a></li>
+        <li><a href="#remarks">Remarks</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">Reference</a>
+      <ul>
+        <li><a href="#ienumerator">IEnumerator</a></li>
+        <li><a href="#yield">yield</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+          
+          <h2 id="coroutines">Coroutines?</h2>
+<p>코루틴은 실행을 중단하고 유니티로 제어를 반환하는데 다음 프레임에서 중단 된 지점부터 실행을 계속할 수 있는 기능</p>
+<ul>
+<li>유니티 도큐먼트 &gt; 
+<a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">Coroutines?</a></li>
+</ul>
+<p>기본값은 프레임이지만 프레임 단위가 아닌 시간 단위 또는 커스텀한 단위로 실행을 할 수 있다.<br>
+unity optimize에 관심이 있다면 Update() 내에 호출 대신 Coroutines을 이용하란 말을 본 적이 있을거다.
+매 프레임마다 체크해야할 게 아니라면 Coroutines으로 대체하면 어떨까?</p>
+<ul>
+<li>읽어볼만한 내용 
+<a href="https://blogs.unity3d.com/kr/2015/12/23/1k-update-calls/" target="_blank" rel="noopener">10000번의 Update() 호출</a></li>
+</ul>
+<h3 id="start">Start</h3>
+<p>MonoBehaviour.StartCoroutine()로 호출하면 된다. 
+<a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html" target="_blank" rel="noopener">문서</a></p>
+<pre><code>public Coroutine StartCoroutine(IEnumerator routine);
+</code></pre>
+<p>반환형을 보면 Coroutine 으로 선언되어 있는데 단순 참조용이고 속성이나 함수를 보유하지 않는다고 안내한다.</p>
+<blockquote>
+<p>원문:  Instances of this class are only used to reference these coroutines, and do not hold any exposed properties or functions.</p>
+</blockquote>
+<p>따라서 제어를 위해 변수로 사용한다면 타입을 IEnumerator로 지정해야 한다.</p>
+<pre><code>Coroutine myCoroutine = StartCoroutine(); // X
+
+IEnumerator myCoroutine = StartCoroutine(); // O
+</code></pre>
+<h3 id="stop">Stop</h3>
+<ol>
+<li>StopCoroutine(), StopAllCoroutines() 호출로 코루틴을 중단할 수 있다.</li>
+<li>코루틴이 연결된 GameObject가 SetActive(false)로 비활성화 될경우 중단된다.</li>
+<li>Destroy(MonoBehaviour 인스턴스) 호출 시 즉시 OnDisable()이 호출되고 코루틴이 처리되어 효과적으로 중지된다.</li>
+<li>OnDestroy()는 프레임 끝에서 호출됨.</li>
+</ol>
+<h3 id="remarks">Remarks</h3>
+<p>MonoBehaviour enabled 설정으로는 중단되지 않음</p>
+<h2 id="reference">Reference</h2>
+<h3 id="ienumerator">IEnumerator</h3>
+<p>유니티 도규먼트를 읽다보면 코루틴의의 반환형은 IEnumerator, 펑션 바디 어딘가에 yield return 문이 포함되어있고, 
+yield return null 라인은 실행이 중지되고 다음 프레임에서 재개되는 포인트다 라는 말이 있다.</p>
+<blockquote>
+<p>원문: It is essentially a function declared with a return type of IEnumerator and with the yield return statement included somewhere in the body. The yield return null line is the point at which execution will pause and be resumed the following frame.</p>
+</blockquote>
+<p>IEnumerator는 뭔데? 여기서부턴 C# 도큐먼트를 보자. &gt;
+
+<a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerator?redirectedfrom=MSDN&amp;view=net-5.0" target="_blank" rel="noopener">IEnumerator</a><br>
+non-generic collection에 간단한 반복을 지원한다고 한다.</p>
+<pre><code>public interface IEnumerator 
+{
+  // 현재 위치에 있는 컬렉션 요소를 반환
+  public object Current { get; }
+
+  // 열거자를 컬렉션의 다음 요소로 이동
+  public bool MoveNext ();
+  // 열거자를 컬렉션의 첫 번재 요소 앞의 초기 위치로 설정
+  public void Reset ();
+}
+</code></pre>
+<p>문서를 읽다보면 foreach 문은 열거자의 복잡성을 숨겨주니 열거자를 직접 조작하기보다 foreach 사용을 추천한다 라는 내용이 있다.</p>
+<blockquote>
+<p>원문: The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators. Therefore, using foreach is recommended instead of directly manipulating the enumerator.</p>
+</blockquote>
+<pre><code>foreach (Person p in peopleList)
+{
+  Console.WriteLine(p.firstName + &quot; &quot; + p.lastName);
+}
+
+var enumerator = peopleList.GetEnumerator();
+
+while (enumerator.MoveNext())
+{
+  Console.WriteLine(enumerator.Current.firstName + &quot; &quot; + enumerator.Current.lastName);
+}
+</code></pre>
+<p>어쩌면 당연하게, 익숙하게 사용하던 구문이였지만 문서를 읽으면 이런 재미난 내용도 읽을 수 있고 좋다.</p>
+<h3 id="yield">yield</h3>
+<p>그럼 yield는 뭔데? 마찬가지로 c# 도큐먼트를 보자. &gt;
+
+<a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/yield" target="_blank" rel="noopener">yield</a><br>
+메소드, 연산자, get 접근자가 iterator(반복자)임을 나타낸다고 한다.</p>
+<pre><code>public class PowersOf2
+{
+  static void Main()
+  {
+    // Display powers of 2 up to the exponent of 8:
+    foreach (int i in Power(2, 8))
+    {
+      Console.Write(&quot;{0} &quot;, i);
+    }
+  }
+
+  public static System.Collections.Generic.IEnumerable&lt;int&gt; Power(int number, int exponent)
+  {
+    int result = 1;
+
+    for (int i = 0; i &lt; exponent; i++)
+    {
+      result = result * number;
+      yield return result;
+    }
+  }
+
+  // Output: 2 4 8 16 32 64 128 256
+}
+</code></pre>
+<p>예제가 띠용하는 느낌도 있지만.. IEnumerator의 예제를 보고 yield의 예제를 보면 쉽게 이해할 수 있다.</p>
+<hr>
+<p>마무리를 어떻게 지어야할지 모르겠지만 코루틴이 뭔진 쉽게 찾아볼 수 있고 사용법도 간단하다.<br>
+하지만 한 번쯤 곱씹어 볼 필요는 있어보인다.</p>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn"></span></span>
+    
+    <time>Feb 18, 2021</time>
+    
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="/tags/unity">Unity</a>  <a class="category" href="/tags/c">C#</a>  <a class="category" href="/tags/coroutine">Coroutine</a>  
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="/post/test/" title="Test">Test</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+
+    <p>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+         
+      
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021  - <a href="/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+  </body>
+</html>
+
