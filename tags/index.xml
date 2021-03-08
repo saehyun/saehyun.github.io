@@ -34,23 +34,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>tag1</title>
-      <link>/tags/tag1/</link>
-      <pubDate>Wed, 17 Feb 2021 17:59:54 +0900</pubDate>
-      
-      <guid>/tags/tag1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag2</title>
-      <link>/tags/tag2/</link>
-      <pubDate>Wed, 17 Feb 2021 17:59:54 +0900</pubDate>
-      
-      <guid>/tags/tag2/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

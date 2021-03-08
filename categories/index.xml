@@ -16,23 +16,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>category1</title>
-      <link>/categories/category1/</link>
-      <pubDate>Wed, 17 Feb 2021 17:59:54 +0900</pubDate>
-      
-      <guid>/categories/category1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>category2</title>
-      <link>/categories/category2/</link>
-      <pubDate>Wed, 17 Feb 2021 17:59:54 +0900</pubDate>
-      
-      <guid>/categories/category2/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
