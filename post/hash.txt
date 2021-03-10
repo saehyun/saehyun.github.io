@@ -1,0 +1,40 @@
+
+dictionary
+
+hashtable 기반
+
+> System.Collections.Generic.Dictionary
+
+1. Hash
+
+목적: Hashtable에 사용할 목적으로 만들어짐
+(It is by design useful for only one thing: putting an object in a hash table)
+
+해시는 유니크하지 않다.
+> 고유 식별자로 사용하면 안된다.
+> 동일한 해시 코드가 동일한 값을 보장하지도 않는다.
+
+가능한 해시 코드 값은 2^32개뿐.
+> GetHashCode() 반환이 int형
+
+왜 사용하냐?
+> key 값을 직접 엑세스하려면 배열 크기가 엄청 커짐. 낭비되는 공간을 줄이기 위해 해시 함수를 사용한다.
+
+
+해시함수를 통해 나온 키값을 bucket이라는 배열에 저장한다.
+(이때, 해시는 고유하지 않으므로 충돌(Collision)이 날 수 있다. -> Collision Resolution을 통해 빈 버켓을 찾음)
+
+시간복잡도가 O(1)에 가까운게 bucket 어레이에 해시값으로 바로 접근하기 때문에 가능. (정확하지 않은건 해시 충돌로 최악의 경우 O(n)까지..)
+
+
+
+dictionary hash function
+
+         private struct Entry {
+            public int hashCode;    // Lower 31 bits of hash code, -1 if unused
+            public int next;        // Index of next entry, -1 if last
+            public TKey key;           // Key of entry
+            public TValue value;         // Value of entry
+        }
+		
+		

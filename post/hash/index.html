@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
@@ -17,7 +14,7 @@
   
 
   
-  <title>C#</title>
+  <title>Hash</title>
 
   
   
@@ -34,7 +31,7 @@
   <link href="/favicon.png" rel="icon">
 
   
-  <link href="/tags/c#/index.xml" rel="alternate" type="application/rss+xml" title="KSH" />
+  
 
   <meta name="description" content="" />
   <meta name="keywords" content="">
@@ -86,76 +83,90 @@
 <div id="main">
   <div id="content">
     <div>
-      <article role="article">
-        <header>
-          <h1 class="entry-title">
-            Tag: C#
-          </h1>
-        </header>
-        <div id="blog-archives" class="category">
-          
-          <h2>
-            2021
-          </h2>
-          <article>
-            <h1>
-              <a href="/post/hash/" title="Hash">Hash</a>
-            </h1>
-            <time>
-              <span class="month">Mar</span>
-              <span class="day">10</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="/categories/c">C#</a>
-              </br>
-                
+      <article class="hentry" role="article">
 
-                
-                
-                tags:
-                 <a class="category" href="/tags/c">C#</a> <a class="category" href="/tags/hash">Hash</a>
-                
-              </span>
-            </footer>
-          </article>
-          
-          <h2>
-            2021
-          </h2>
-          <article>
-            <h1>
-              <a href="/post/coroutines/" title="Coroutines">Coroutines</a>
-            </h1>
-            <time>
-              <span class="month">Feb</span>
-              <span class="day">18</span>
-            </time>
-            <footer>
-              <span class="categories"> 
-                
-                
-                posted in:
-                 <a class="category" href="/categories/unity">Unity</a> <a class="category" href="/categories/c">C#</a>
-              </br>
-                
+        
+        
 
-                
-                
-                tags:
-                 <a class="category" href="/tags/unity">Unity</a> <a class="category" href="/tags/c">C#</a> <a class="category" href="/tags/coroutine">Coroutine</a>
-                
-              </span>
-            </footer>
-          </article>
+<header>
+  <p class="meta">Mar 10, 2021
+     - 1 minute read 
+    
+
+    
+    
+      - <a class="label" href="/categories/c/">C# </a>
+    
+  </p>
+  <h1 class="entry-title">
+     Hash 
+  </h1>
+</header>
+
+
+        <div class="entry-content">
           
+          
+          
+          <h4 id="목적">목적</h4>
+<p>Hashtable, DictionaryBase 등 해시 기반 컬렉션에 개체 삽입 및 식별하는데 사용</p>
+<blockquote>
+<p>It is by design useful for only one thing: putting an object in a hash table</p>
+</blockquote>
+<h4 id="특징">특징</h4>
+<ol>
+<li>Hash는 유니크하지 않다.</li>
+</ol>
+<ul>
+<li>고유 식별자로 사용하면 안된다.</li>
+<li>동일한 해시 코드가 동일한 값을 보장하지도 않는다.<br>
+-&gt; 오브젝트의 equals 여부를 해시코드로 비교하면 안된다.</li>
+</ul>
+<ol start="2">
+<li>
+<p>가능한 해시 코드 값은 2^32개뿐.(부호있는 32비트 정수 값을 반환)</p>
+<p>public virtual int GetHashCode();</p>
+</li>
+<li>
+<p>왜 사용하냐?</p>
+</li>
+</ol>
+<ul>
+<li>key 값을 직접 엑세스하려면 배열 크기가 엄청 커짐.<br>
+낭비되는 공간을 줄이기 위해 해시 코드를 사용한다.</li>
+</ul>
+
         </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn"></span></span>
+    
+    <time>Mar 10, 2021</time>
+    
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="/tags/c">C#</a>  <a class="category" href="/tags/hash">Hash</a>  
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="/post/coroutines/" title="Coroutines">Coroutines</a>
+    
+
+    
+  </p>
+  
+</footer>
+
       </article>
     </div>
-
     
 
 <aside class="sidebar thirds">
