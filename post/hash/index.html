@@ -99,7 +99,7 @@
     
   </p>
   <h1 class="entry-title">
-     Hash 
+    <a href="/post/hash/">Hash</a>
   </h1>
 </header>
 
@@ -111,7 +111,7 @@
           <h4 id="목적">목적</h4>
 <p>Hashtable, DictionaryBase 등 해시 기반 컬렉션에 개체 삽입 및 식별하는데 사용</p>
 <blockquote>
-<p>It is by design useful for only one thing: putting an object in a hash table</p>
+<p>A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the Dictionary&lt;TKey,TValue&gt; class, the Hashtable class, or a type derived from the DictionaryBase class.</p>
 </blockquote>
 <h4 id="특징">특징</h4>
 <ol>
@@ -125,7 +125,8 @@
 <ol start="2">
 <li>
 <p>가능한 해시 코드 값은 2^32개뿐.(부호있는 32비트 정수 값을 반환)</p>
-<p>public virtual int GetHashCode();</p>
+<pre><code>public virtual int GetHashCode();
+</code></pre>
 </li>
 <li>
 <p>왜 사용하냐?</p>
