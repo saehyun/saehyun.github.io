@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hashcode on KSH</title>
+    <link>/tags/hashcode/</link>
+    <description>Recent content in Hashcode on KSH</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 10 Mar 2021 16:52:07 +0900</lastBuildDate><atom:link href="/tags/hashcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hashcode</title>
+      <link>/post/hashcode/</link>
+      <pubDate>Wed, 10 Mar 2021 16:52:07 +0900</pubDate>
+      
+      <guid>/post/hashcode/</guid>
+      <description>목적 Hashtable, DictionaryBase 등 해시 기반 컬렉션에 개체 삽입 및 식별하는데 사용
+ A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the Dictionary&amp;lt;TKey,TValue&amp;gt; class, the Hashtable class, or a type derived from the DictionaryBase class.
+ 특징  Hash code는 유니크하지 않다.   고유 식별자로 사용하면 안된다. 동일한 해시 코드가 동일한 값을 보장하지도 않는다.
+-&amp;gt; 오브젝트의 equals 여부를 해시코드로 비교하면 안된다.</description>
+    </item>
+    
+  </channel>
+</rss>

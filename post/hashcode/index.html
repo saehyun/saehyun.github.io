@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Hashcode</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="/">KSH</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+</ul>
+
+<ul class="subscription">
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Mar 10, 2021
+     - 1 minute read 
+    
+
+    
+    
+      - <a class="label" href="/categories/c/">C# </a>
+    
+  </p>
+  <h1 class="entry-title">
+    <a href="/post/hashcode/">Hashcode</a>
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <h4 id="목적">목적</h4>
+<p>Hashtable, DictionaryBase 등 해시 기반 컬렉션에 개체 삽입 및 식별하는데 사용</p>
+<blockquote>
+<p>A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the Dictionary&lt;TKey,TValue&gt; class, the Hashtable class, or a type derived from the DictionaryBase class.</p>
+</blockquote>
+<h4 id="특징">특징</h4>
+<ol>
+<li>Hash code는 유니크하지 않다.</li>
+</ol>
+<ul>
+<li>고유 식별자로 사용하면 안된다.</li>
+<li>동일한 해시 코드가 동일한 값을 보장하지도 않는다.<br>
+-&gt; 오브젝트의 equals 여부를 해시코드로 비교하면 안된다.</li>
+</ul>
+<ol start="2">
+<li>
+<p>가능한 해시 코드 값은 2^32개뿐.(부호있는 32비트 정수 값을 반환)</p>
+<pre><code>public virtual int GetHashCode();
+</code></pre>
+</li>
+<li>
+<p>왜 사용하냐?</p>
+</li>
+</ol>
+<ul>
+<li>key 값을 직접 엑세스하려면 배열 크기가 엄청 커짐.<br>
+낭비되는 공간을 줄이기 위해 해시 코드를 사용한다.</li>
+</ul>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn"></span></span>
+    
+    <time>Mar 10, 2021</time>
+    
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="/tags/c">C#</a>  <a class="category" href="/tags/hashcode">Hashcode</a>  
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="/post/coroutines/" title="Coroutines">Coroutines</a>
+    
+
+    
+      <a class="basic-alignment right" href="/post/dictionary/" title="Dictionary">Dictionary</a>
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+
+    <p>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+         
+      
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021  - <a href="/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

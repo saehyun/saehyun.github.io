@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>Dictionary</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="/favicon.png" rel="icon">
+
+  
+  
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  
+  
+
+  
+  
+</head>
+<body>
+
+
+<header role="banner">
+<hgroup>
+  
+  <h1><a href="/">KSH</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+</ul>
+
+<ul class="subscription">
+  
+</ul>
+
+
+</nav>
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+  <p class="meta">Mar 12, 2021
+     - 1 minute read 
+    
+
+    
+    
+      - <a class="label" href="/categories/c/">C# </a>
+    
+  </p>
+  <h1 class="entry-title">
+    <a href="/post/dictionary/">Dictionary</a>
+  </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <h2 id="dictionary">Dictionary?</h2>
+<p>Key, Value 값을 가진 Collection. (Hashtable로 구현 됨)</p>
+<h4 id="특징">특징</h4>
+<p>해시함수를 통해 나온 키값을 bucket이라는 array에 저장한다.<br>
+이때, 해시는 고유하지 않으므로 충돌(Collision)이 날 수 있다.<br>
+-&gt; Collision Resolution을 통해 빈 버켓을 찾음)</p>
+<h4 id="collision-resolution">Collision Resolution</h4>
+<p>C#은 Chaining 방식으로 충돌을 해결한다.</p>
+<p><img src="https://docs.microsoft.com/en-us/previous-versions/images/ms379571.datastructures20_2fig11(en-us,vs.80).gif" alt="sc"></p>
+<h4 id="time-complexity">Time Complexity</h4>
+<p>시간복잡도가 O(1)에 가까운게 bucket array 해시값으로 바로 접근하기 때문에 가능.</p>
+<p>TryGetValue() 구현을 보면 아래와 같다.</p>
+<pre><code>public bool TryGetValue(TKey key, out TValue value) {
+    int i = FindEntry(key);
+    if (i &gt;= 0) {
+        value = entries[i].value;
+        return true;
+    }
+    value = default(TValue);
+    return false;
+}
+</code></pre>
+<p>우선, key 값으로 진입점을 찾고, Entry array에서 value를 꺼내온다.</p>
+<pre><code>private int FindEntry(TKey key) {
+    if( key == null) {
+        ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
+    }
+
+    if (buckets != null) {
+        int hashCode = comparer.GetHashCode(key) &amp; 0x7FFFFFFF;
+        for (int i = buckets[hashCode % buckets.Length]; i &gt;= 0; i = entries[i].next) {
+            if (entries[i].hashCode == hashCode &amp;&amp; comparer.Equals(entries[i].key, key)) return i;
+        }
+    }
+    return -1;
+}
+</code></pre>
+<p>bucket array를 loop를 돌려 index 값을 찾고 entry array에서 value를 얻어온다.</p>
+<pre><code>private struct Entry {
+    public int hashCode;    // Lower 31 bits of hash code, -1 if unused
+    public int next;        // Index of next entry, -1 if last
+    public TKey key;           // Key of entry
+    public TValue value;         // Value of entry
+}
+</code></pre>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn"></span></span>
+    
+    <time>Mar 12, 2021</time>
+    
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="/tags/c">C#</a>  <a class="category" href="/tags/dictionary">Dictionary</a>  
+    
+    </span>
+  </p>
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="/post/hashcode/" title="Hashcode">Hashcode</a>
+    
+
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+
+    <p>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+         
+      
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+    <footer role="contentinfo">
+      <p>Copyright &copy; 2021  - <a href="/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io" rel="noopener noreferrer">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/" rel="noopener noreferrer">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    
+    
+
+    
+  </body>
+</html>
+

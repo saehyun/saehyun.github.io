@@ -6,16 +6,32 @@
     <description>Recent content in C# on KSH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Mar 2021 16:52:07 +0900</lastBuildDate><atom:link href="/tags/c#/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Mar 2021 17:14:08 +0900</lastBuildDate><atom:link href="/tags/c#/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hash</title>
-      <link>/post/hash/</link>
+      <title>Dictionary</title>
+      <link>/post/dictionary/</link>
+      <pubDate>Fri, 12 Mar 2021 17:14:08 +0900</pubDate>
+      
+      <guid>/post/dictionary/</guid>
+      <description>Dictionary? Key, Value 값을 가진 Collection. (Hashtable로 구현 됨)
+특징 해시함수를 통해 나온 키값을 bucket이라는 array에 저장한다.
+이때, 해시는 고유하지 않으므로 충돌(Collision)이 날 수 있다.
+-&amp;gt; Collision Resolution을 통해 빈 버켓을 찾음)
+Collision Resolution C#은 Chaining 방식으로 충돌을 해결한다.
+Time Complexity 시간복잡도가 O(1)에 가까운게 bucket array 해시값으로 바로 접근하기 때문에 가능.
+TryGetValue() 구현을 보면 아래와 같다.
+public bool TryGetValue(TKey key, out TValue value) {int i = FindEntry(key);if (i &amp;gt;= 0) {value = entries[i].</description>
+    </item>
+    
+    <item>
+      <title>Hashcode</title>
+      <link>/post/hashcode/</link>
       <pubDate>Wed, 10 Mar 2021 16:52:07 +0900</pubDate>
       
-      <guid>/post/hash/</guid>
+      <guid>/post/hashcode/</guid>
       <description>목적 Hashtable, DictionaryBase 등 해시 기반 컬렉션에 개체 삽입 및 식별하는데 사용
  A hash code is a numeric value that is used to insert and identify an object in a hash-based collection such as the Dictionary&amp;lt;TKey,TValue&amp;gt; class, the Hashtable class, or a type derived from the DictionaryBase class.
- 특징  Hash는 유니크하지 않다.   고유 식별자로 사용하면 안된다. 동일한 해시 코드가 동일한 값을 보장하지도 않는다.
+ 특징  Hash code는 유니크하지 않다.   고유 식별자로 사용하면 안된다. 동일한 해시 코드가 동일한 값을 보장하지도 않는다.
 -&amp;gt; 오브젝트의 equals 여부를 해시코드로 비교하면 안된다.</description>
     </item>
     
